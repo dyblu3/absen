@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>History - Data Absensi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Roboto Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet" />
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1><i class="fa-solid fa-clipboard-list"></i> History - Absensi Mengajar</h1>
+        <button class="mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </header>
+
+      <!-- Manual Input Form with Suggestion Datalists -->
+      <div class="form-grid">
+        <input type="text" id="nama" placeholder="Nama Siswa" list="namaSuggestions" required />
+        <input type="text" id="mapel" placeholder="Mata Pelajaran" list="mapelSuggestions" required />
+        <select id="status">
+          <option value="Hadir">Hadir</option>
+          <option value="Izin">Izin</option>
+          <option value="Sakit">Sakit</option>
+          <option value="Alpha">Alpha</option>
+        </select>
+        <input type="number" id="fee" placeholder="Fee" value="50000" />
+        <button class="save-btn" onclick="simpanData()">
+          <i class="fa-solid fa-floppy-disk"></i> Simpan
+        </button>
+      </div>
+      <textarea id="catatan" placeholder="Catatan (misal: Bab 5, PR halaman 10)" rows="2"></textarea>
+
+      <!-- Datalists for Suggestions -->
+      <datalist id="namaSuggestions"></datalist>
+      <datalist id="mapelSuggestions"></datalist>
+
+      <!-- Absensi Table -->
+      <table id="tabel-absen">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Mapel</th>
+            <th>Status</th>
+            <th>Fee</th>
+            <th>Tanggal</th>
+            <th>Catatan</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <!-- Summary Card -->
+      <div class="summary-card">
+        <h2>📊 Ringkasan Bulan Ini</h2>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <h3>Total Pertemuan</h3>
+            <p id="total-pertemuan">0</p>
+          </div>
+          <div class="summary-item">
+            <h3>Total Hadir</h3>
+            <p id="total-hadir">0</p>
+          </div>
+          <div class="summary-item">
+            <h3>Total Fee</h3>
+            <p id="total-fee">Rp0</p>
+          </div>
+          <div class="summary-item">
+            <h3>Rata-rata per Pertemuan</h3>
+            <p id="rata-fee">Rp0</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="btn-success" onclick="exportToCSV()">
+          <i class="fa-solid fa-file-csv"></i> Export CSV
+        </button>
+        <button class="btn-info" onclick="exportToPDF()">
+          <i class="fa-solid fa-file-pdf"></i> Export PDF
+        </button>
+        <button class="btn-warning" onclick="exportToExcel()">
+          <i class="fa-solid fa-file-excel"></i> Export Excel
+        </button>
+        <button class="btn-danger" onclick="confirmHapusSemua()">
+          <i class="fa-solid fa-trash"></i> Hapus Semua
+        </button>
+      </div>
+    </div>
+
+    <!-- JS Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
